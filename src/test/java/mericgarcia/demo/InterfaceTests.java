@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Created by mericgarcia on 27/01/15.
  */
-public class InterfaceTests {
+public class InterfaceTests extends DemoTests{
 
     @Test
     public void doWork() throws Exception {
 
-        System.out.println("doWork()");
+        methodeHead("doWork()");
 
         Worker boulanger = new Boulanger("Aimable Castanier");
         Worker traducteurFrançais = new Traducteur("Aurelien LeJeune");
@@ -31,13 +31,14 @@ public class InterfaceTests {
 
         workers.forEach((w)-> w.work());
 
-        System.out.println("");
+        out("");
 
     }
 
     @Test
     public void doSpeek() throws Exception {
-        System.out.println("doSpeek()");
+
+        methodeHead("doSpeek()");
 
         Person boulanger = new Boulanger("Aimable Castanier");
         Person traducteurFrançais = new Traducteur("Aurelien LeJeune");
@@ -47,7 +48,6 @@ public class InterfaceTests {
 
         persons.forEach((w)-> w.speek());
 
-        System.out.println("");
 
     }
 
