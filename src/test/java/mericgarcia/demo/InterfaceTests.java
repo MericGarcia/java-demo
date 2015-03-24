@@ -18,7 +18,7 @@ public class InterfaceTests extends DemoTests{
         methodeHead("doWork()");
 
         Worker boulanger = new Boulanger("Aimable Castanier");
-        Worker traducteurFrançais = new Traducteur("Aurelien LeJeune");
+        Worker traducteurFrancais = new Traducteur("Aurelien LeJeune");
         Worker traducteurAnglais = new Interpreter("James Henry");
         Worker inconnu = new Worker() {
             @Override
@@ -27,7 +27,7 @@ public class InterfaceTests extends DemoTests{
             }
         };
 
-        List<Worker> workers = Arrays.asList(boulanger,traducteurFrançais,traducteurAnglais,inconnu);
+        List<Worker> workers = Arrays.asList(boulanger,traducteurFrancais,traducteurAnglais,inconnu);
 
         workers.forEach((w)-> w.work());
 
@@ -41,10 +41,10 @@ public class InterfaceTests extends DemoTests{
         methodeHead("doSpeek()");
 
         Person boulanger = new Boulanger("Aimable Castanier");
-        Person traducteurFrançais = new Traducteur("Aurelien LeJeune");
+        Person traducteurFrancais = new Traducteur("Aurelien LeJeune");
         Person traducteurAnglais = new Interpreter("James Henry");
 
-        List<Person> persons = Arrays.asList(boulanger,traducteurFrançais,traducteurAnglais);
+        List<Person> persons = Arrays.asList(boulanger,traducteurFrancais,traducteurAnglais);
 
         persons.forEach((w)-> w.speek());
 
