@@ -28,7 +28,6 @@ public class DemoTests {
 
     protected static void methodeHead(String message){
         System.out.println("----> method : " + message);
-        System.out.println();
     }
 
 }

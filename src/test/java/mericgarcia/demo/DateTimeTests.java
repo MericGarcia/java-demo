@@ -5,12 +5,14 @@ import mericgarcia.demo.model.*;
 import org.junit.Test;
 
 import java.time.*;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalUnit;
+import java.time.chrono.Chronology;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.FormatStyle;
+import java.time.temporal.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -72,6 +74,40 @@ public class DateTimeTests extends DemoTests{
 
     }
 
+    @Test
+    public void temporalAdjusterAndZone() throws Exception {
+
+        methodeHead("temporalAdjuster()");
+        out("");
+
+        LocalDateTime date = LocalDateTime.now();
+
+        //Temporal adjuster
+        Temporal premierJeudiDansTroisMois = TemporalAdjusters.firstInMonth(DayOfWeek.TUESDAY).adjustInto(date
+                .plusMonths(3));
+        out(
+                DateTimeFormatter
+                        .ofLocalizedDate(FormatStyle.FULL)
+                        .format(premierJeudiDansTroisMois)
+        );
+
+
+        //Zoned date time
+        ZonedDateTime alaska = ZonedDateTime.now(ZoneId.of("America/Anchorage"));
+         out(
+                DateTimeFormatter
+                        .ofLocalizedDateTime(FormatStyle.FULL)
+                        .format(alaska)
+        );
+
+        ZonedDateTime tokyo = alaska.withZoneSameInstant(ZoneId.of("Asia/Tokyo"));
+        out(
+                DateTimeFormatter
+                        .ofLocalizedDateTime(FormatStyle.FULL)
+                        .format(tokyo)
+        );
+
+    }
 
 }
 
