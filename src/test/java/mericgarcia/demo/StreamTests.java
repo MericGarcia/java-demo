@@ -20,16 +20,15 @@ public class StreamTests extends DemoTests{
 
     @Before
     public void initStream(){
-        header(" Stream Tests - data :");
+        header(" ## data ##");
         out(strings.stream().collect(Collectors.joining(",","(",")")));
+        out("---------------------");
         out("");
     }
 
 
     @Test
     public void testStreamCount() throws Exception {
-
-        methodeHead("testStreamCount()");
 
         long n = strings.stream()
                 .filter(x -> !x.equals("Deux"))
@@ -42,12 +41,10 @@ public class StreamTests extends DemoTests{
     @Test
     public void testStreamStringGenerationCollector() throws Exception {
 
-        methodeHead("testStreamStringGenerationCollector()");
-
         String resultString = strings.parallelStream()
-                .filter(x -> !x.equals("Trois") && !x.equals("Cinq"))
-                .map((s) -> s + "!")
-                .collect(Collectors.joining(","));
+                                    .filter(x -> !x.equals("Trois") && !x.equals("Cinq"))
+                                    .map((s) -> s + "!")
+                                    .collect(Collectors.joining(","));
 
         out("Result String : " + resultString);
         Assert.assertEquals("Test collector fails.", "Un!,Deux!,Quatre!,Six!", resultString);

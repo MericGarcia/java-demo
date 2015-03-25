@@ -15,8 +15,6 @@ public class InterfaceTests extends DemoTests{
     @Test
     public void doWork() throws Exception {
 
-        methodeHead("doWork()");
-
         Worker boulanger = new Boulanger("Aimable Castanier");
         Worker traducteurFrancais = new Traducteur("Aurelien LeJeune");
         Worker traducteurAnglais = new Interpreter("James Henry");
@@ -37,8 +35,6 @@ public class InterfaceTests extends DemoTests{
 
     @Test
     public void doSpeek() throws Exception {
-
-        methodeHead("doSpeek()");
 
         Person boulanger = new Boulanger("Aimable Castanier");
         Person traducteurFrancais = new Traducteur("Aurelien LeJeune");

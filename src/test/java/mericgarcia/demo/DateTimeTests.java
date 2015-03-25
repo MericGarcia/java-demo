@@ -23,9 +23,6 @@ public class DateTimeTests extends DemoTests{
     @Test
     public void instants() throws Exception{
 
-        methodeHead("instants()");
-        out("");
-
         //Duration = duree entre deux instants
         Instant startOfTest = Instant.now();
 
@@ -34,40 +31,43 @@ public class DateTimeTests extends DemoTests{
         Instant endOfTest = Instant.now();
 
         out("Duree du test : " + Duration.between(startOfTest,endOfTest).toNanos() + " ns");
-        Assert.assertTrue(!Duration.between(startOfTest,endOfTest).minus(1, ChronoUnit.SECONDS).isNegative());
+
+        Assert.assertTrue(!Duration.between(startOfTest,endOfTest)
+                                    .minus(1, ChronoUnit.SECONDS)
+                                    .isNegative());
 
     }
 
     @Test
     public void localDateTime() throws Exception {
 
-        methodeHead("localDateTime()");
-        out("");
-
-        LocalDate now = LocalDate.now();
-        LocalDate date = LocalDate.of(2012, Month.DECEMBER, 12);
-
+        //Init
         Temporal depart = LocalTime.of(7, 30); // mon train pour venir
         Temporal secondTime = LocalTime.parse("10:15:30");
 
         //Operation
         Temporal arrivee = depart.plus(30, ChronoUnit.MINUTES);
-        LocalDate newDate = date.minusYears(2);
 
         //Duree
         Duration trajet = Duration.between(depart,arrivee);
 
-        out("Trajet : " + trajet.toMinutes());
+        out("Trajet : " + trajet.toMinutes() + " minutes");
         Assert.assertEquals(trajet, Duration.of(30, ChronoUnit.MINUTES));
 
 
         //Periode
+        LocalDate date = LocalDate.of(2012, Month.DECEMBER, 12);
+        LocalDate now = LocalDate.now();
+
         Period period = Period.between(now,date);
-        out("Periode : " + period.toTotalMonths());
+        out("Periode : " + period.toTotalMonths() + " months");
         Assert.assertTrue(period.isNegative());
 
+        //Auter Periode
+        LocalDate newDate = date.minusYears(2);
+
         Period secondPeriod = Period.between(newDate,date);
-        out("Second Periode : " + secondPeriod.toTotalMonths());
+        out("Second Periode : " + secondPeriod.toTotalMonths() + " months");
         Assert.assertEquals(24, secondPeriod.toTotalMonths());
         out("");
 
@@ -77,14 +77,12 @@ public class DateTimeTests extends DemoTests{
     @Test
     public void temporalAdjusterAndZone() throws Exception {
 
-        methodeHead("temporalAdjuster()");
-        out("");
-
         LocalDateTime date = LocalDateTime.now();
 
         //Temporal adjuster
-        Temporal premierJeudiDansTroisMois = TemporalAdjusters.firstInMonth(DayOfWeek.TUESDAY).adjustInto(date
-                .plusMonths(3));
+        Temporal premierJeudiDansTroisMois = TemporalAdjusters.firstInMonth(DayOfWeek.TUESDAY)
+                                                                .adjustInto(date.plusMonths(3));
+
         out(
                 DateTimeFormatter
                         .ofLocalizedDate(FormatStyle.FULL)

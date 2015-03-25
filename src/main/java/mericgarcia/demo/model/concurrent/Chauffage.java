@@ -1,4 +1,4 @@
-package mericgarcia.demo.model;
+package mericgarcia.demo.model.concurrent;
 
 import java.util.concurrent.locks.StampedLock;
 

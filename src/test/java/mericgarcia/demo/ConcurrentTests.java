@@ -1,13 +1,9 @@
 package mericgarcia.demo;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.atomic.LongAdder;
-import java.util.stream.Collectors;
 
-import mericgarcia.demo.model.Chauffage;
+import mericgarcia.demo.model.concurrent.Chauffage;
 
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -18,8 +14,6 @@ public class ConcurrentTests extends DemoTests {
 
 	@Test
 	public void concurrentAddersDemo() throws Exception {
-
-		methodeHead("concurrentAddersDemo()");
 
 		LongAdder myLong = new LongAdder();
 
@@ -32,8 +26,6 @@ public class ConcurrentTests extends DemoTests {
 
 	@Test
 	public void stampedLocksDemo() throws Exception {
-
-		methodeHead("stampedLocksDemo()");
 
 		// construction de notre unique chaudiere
 		final Chauffage chauffage = new Chauffage(20L, 30L);
@@ -53,23 +45,25 @@ public class ConcurrentTests extends DemoTests {
 
 		Thread[] personnes = new Thread[30];
 
+        //initialisation des threads
 		for (int i = 0; i < personnes.length; i++) {
 			personnes[i] = new Thread(personne);
 		}
 
-		// lancement de nos habitants
+		// lancement des thread
 		for (int i = 0; i < personnes.length; i++) {
 			personnes[i].start();
 		}
 
-		// on attend que chaque thread ait fini son exécution
+		// on attend la fin des threads
 		for (int i = 0; i < personnes.length; i++) {
 			// jette InterruptedException
 			personnes[i].join();
 		}
 
-		// on affiche la température de notre chaudière
-		out("Temperature finale = " + chauffage.getTemperature() + ", " + chauffage.totalAttentePourRegard + " get avec attente / " + chauffage.totalRegard + " get en tout" );
+		// on affiche la temperature de notre chauffage et l'utlisation des locks
+		out("Temperature finale = " + chauffage.getTemperature() + ", " + chauffage.totalAttentePourRegard
+                + " get avec attente / " + chauffage.totalRegard + " get en tout" );
 
 	}
 
