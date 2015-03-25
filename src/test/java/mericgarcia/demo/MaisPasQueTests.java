@@ -1,16 +1,20 @@
 package mericgarcia.demo;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.time.Month;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.StringJoiner;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Created by mericgarcia on 23/03/15.
@@ -30,23 +34,24 @@ public class MaisPasQueTests extends DemoTests {
 
 
 
-        //On peut récuperer un stream sur les lignes ...
+        //On peut recuperer un stream sur les lignes ...
         Stream<String> lines = Files.lines(Paths.get("src/test/resources","./test_copy.csv"));
 
-        // ... et afficher toutes les lignes bien formatées distinctes
+        // ... et afficher toutes les lignes bien formatees distinctes
         lines.filter(
                              (s) -> s.chars()
                                 .filter( c -> c == ';')
-                                .count() == 3)
+                                .count() == 3
+                 )
                 .distinct()
                 .forEach(s -> out(s));
 
 
 
-        //On peut récuperer un second stream sur les lignes ...
+        //On peut recuperer un second stream sur les lignes ...
         Stream<String> lines2 = Files.lines(Paths.get("src/test/resources","./test_copy.csv"));
 
-        // ... et compter toutes les lignes bien formatées distinctes
+        // ... et compter toutes les lignes bien formatees distinctes
         long number = lines2.filter(
                 (s) -> s.chars()
                         .filter( c -> c == ';')
@@ -102,14 +107,54 @@ public class MaisPasQueTests extends DemoTests {
         methodeHead("collectionsDemo2()");
         out("");
 
+        //les concurentHashMap
         ConcurrentHashMap<Integer,List<String>> chiffresMap =
-        Arrays.asList("Un","Deux","Trois","Quatre","Cinq","Six","Sept","Huit","Neuf").stream().collect(Collectors
-                .groupingByConcurrent(String::length), List::add);
+        (ConcurrentHashMap<Integer, List<String>>) Arrays.asList("Un","Deux","Trois","Quatre","Cinq","Six","Sept","Huit","Neuf")
+        			.stream()
+        			.collect(Collectors.groupingByConcurrent(String::length));
 
-        out("  " + chiffresMap.search(2,(k,v) -> k > 2 && v.lenght() < 1));
-
-        chiffresMap.forEachValue(System.out::println);
-
+        
+        // effectuer une recherche dans une map
+        for(int i=0;i<=10;i++){
+        
+	        chiffresMap.forEachEntry(2,System.out::println);
+	        out(" ESSAI " + i +" : Y a t'il des mots de plus de deux lettres dont le nombre de lettre est unique ? Si oui donnez un exemple.  " + 
+	        chiffresMap.search(1,
+	        	(k,v) -> {
+		        		if(k > 2 && v.size() == 1){
+		        			return v ;
+		        		}
+		        		else{
+		        			return  null; 
+		        		}
+	        		}
+	        ));
+	        
+        }
+        
+        
+        // optionnal on list
+        out("");
+        out("Optionnal on List ");
+        out("");
+        List<String> chiffresList = new ArrayList();
+        chiffresList.addAll(Arrays.asList("Un","Deux","Trois","Quatre","Cinq","Six","Sept","Huit","Neuf"));
+        List<String> chiffresListWithQuatri = new ArrayList();
+        chiffresListWithQuatri.addAll(Arrays.asList("Un","Deux","Trois","Quatre","Quatri","Cinq","Six","Sept","Huit","Neuf"));
+        List<String> emptyChiffresList = Collections.emptyList();
+ 
+        out("max de la list de chiffres : " + maxList(chiffresList));
+        out("max de la list de chiffres avec quatri : " + maxList(chiffresListWithQuatri));
+        out("max emptyChiffresList: " + maxList(emptyChiffresList));
+        
+        
     }
-
+    
+    public String maxList(List<String> list){
+    	return list.stream().max(Comparator.comparing(String::length).
+    			thenComparing(s ->
+    			s.charAt(s.length() -1)
+    					)
+    	).orElse("Pas de Max !");
+    }
 }

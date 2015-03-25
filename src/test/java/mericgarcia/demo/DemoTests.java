@@ -1,9 +1,8 @@
 package mericgarcia.demo;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
+import mericgarcia.demo.model.Worker;
 
-import java.util.StringJoiner;
+import org.junit.Before;
 
 /**
  * Created by mericgarcia on 23/03/15.
@@ -24,6 +23,14 @@ public class DemoTests {
 
     protected static void out(String message){
         System.out.println(message);
+    }
+    
+    protected static void out(Object o){
+        System.out.println(o.toString());
+    }
+    
+    protected static void out(Worker w){
+        System.out.println(w.name());
     }
 
     protected static void methodeHead(String message){
