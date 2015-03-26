@@ -30,7 +30,7 @@ public class StreamTests extends DemoTests{
     @Test
     public void testStreamCount() throws Exception {
 
-        long n = strings.stream()
+        long n = strings.stream().parallel()
                 .filter(x -> !x.equals("Deux"))
                 .count();
 

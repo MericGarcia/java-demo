@@ -3,7 +3,7 @@ package mericgarcia.demo.model;
 /**
  * Created by mericgarcia on 27/01/15.
  */
-public class Interpreter implements FrenchSpeeker, EnglishSpeeker, Worker{
+public class Interpreter implements FrenchSpeaker, EnglishSpeaker, Worker{
 
     private String name;
 
@@ -18,7 +18,7 @@ public class Interpreter implements FrenchSpeeker, EnglishSpeeker, Worker{
 
     @Override
     public void speek(){
-        EnglishSpeeker.super.speek();
+        EnglishSpeaker.super.speek();
     }
 
 

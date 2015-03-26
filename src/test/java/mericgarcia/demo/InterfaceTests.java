@@ -27,7 +27,7 @@ public class InterfaceTests extends DemoTests{
 
         List<Worker> workers = Arrays.asList(boulanger,traducteurFrancais,traducteurAnglais,inconnu);
 
-        workers.forEach((w)-> w.work());
+        workers.forEach((w)->{ w.work();});
 
         out("");
 

@@ -2,7 +2,7 @@ package mericgarcia.demo;
 
 import java.util.concurrent.atomic.LongAdder;
 
-import mericgarcia.demo.model.concurrent.Chauffage;
+import mericgarcia.demo.model.concurrent.LaboratoireIsotherme;
 
 import org.junit.Test;
 
@@ -23,19 +23,20 @@ public class ConcurrentTests extends DemoTests {
 		out(myLong.longValue());
 
 	}
+	
 
 	@Test
 	public void stampedLocksDemo() throws Exception {
 
 		// construction de notre unique chaudiere
-		final Chauffage chauffage = new Chauffage(20L, 30L);
+		final LaboratoireIsotherme chauffage = new LaboratoireIsotherme(20L, 30L);
 
 		Runnable personne = new Runnable() {
 
 			public void run() {
 				int i = 0;
 				while (i < 5) {
-					chauffage.useTemperature();
+					chauffage.effectueUneExperienceIsotherme();
 					chauffage.augmente();
 					i++;
 				}
@@ -62,8 +63,8 @@ public class ConcurrentTests extends DemoTests {
 		}
 
 		// on affiche la temperature de notre chauffage et l'utlisation des locks
-		out("Temperature finale = " + chauffage.getTemperature() + ", " + chauffage.totalAttentePourRegard
-                + " get avec attente / " + chauffage.totalRegard + " get en tout" );
+		out("Temperature finale = " + chauffage.getTemperature() + ", " + chauffage.experienceRefaiteAvecReservation
+                + " experiences avec reservation / " + chauffage.experienceEffectuee + " experiences" );
 
 	}
 

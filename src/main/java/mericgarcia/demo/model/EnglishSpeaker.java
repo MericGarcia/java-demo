@@ -3,10 +3,10 @@ package mericgarcia.demo.model;
 /**
  * Created by mericgarcia on 27/01/15.
  */
-public interface FrenchSpeeker extends Person{
+public interface EnglishSpeaker extends Person{
 
     default void speek(){
-        System.out.println(name() + " dit Bonjour");
+        System.out.println(name() + " says Hello");
     }
 
 }

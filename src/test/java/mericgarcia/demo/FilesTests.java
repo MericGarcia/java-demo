@@ -50,8 +50,7 @@ public class FilesTests extends DemoTests {
         // ... et compter toutes les lignes bien formatees distinctes
 
         long number = lines2.filter(
-                                    line -> line.chars()
-                                                .filter( character -> character == ';')
+                                    line -> line.chars().filter( character -> character == ';')
                                             .count() == 3)
                             .distinct()
                             .count();

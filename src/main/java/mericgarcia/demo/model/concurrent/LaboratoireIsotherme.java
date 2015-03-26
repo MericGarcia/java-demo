@@ -2,17 +2,17 @@ package mericgarcia.demo.model.concurrent;
 
 import java.util.concurrent.locks.StampedLock;
 
-public class Chauffage {
+public class LaboratoireIsotherme {
 
 	private long temperature;
 	private final long max;
 
-	public long totalRegard;
-	public long totalAttentePourRegard;
+	public long experienceEffectuee;
+	public long experienceRefaiteAvecReservation;
 
 	private final StampedLock sl = new StampedLock();
 
-	public Chauffage(long temperature, long max) {
+	public LaboratoireIsotherme(long temperature, long max) {
 		this.temperature = temperature;
 		this.max = max;
 	}
@@ -28,22 +28,24 @@ public class Chauffage {
 		}
 	}
 
-	public double useTemperature() { // A read-only method
+	public void effectueUneExperienceIsotherme() { // A read-only method
 		long stamp = sl.tryOptimisticRead();
 		long currentTemp = temperature;
-		totalRegard++;
+		
 		work(currentTemp);
+		experienceEffectuee++;
+		
 		if (!sl.validate(stamp)) {
 			stamp = sl.readLock();
 			try {
 				currentTemp = temperature;
 				work(currentTemp);
-				totalAttentePourRegard++;
+				experienceRefaiteAvecReservation++;
 			} finally {
 				sl.unlockRead(stamp);
 			}
 		}
-		return currentTemp;
+		
 	}
 	
 	public long getTemperature() { 

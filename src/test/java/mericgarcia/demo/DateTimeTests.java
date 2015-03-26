@@ -80,7 +80,7 @@ public class DateTimeTests extends DemoTests{
         LocalDateTime date = LocalDateTime.now();
 
         //Temporal adjuster
-        Temporal premierJeudiDansTroisMois = TemporalAdjusters.firstInMonth(DayOfWeek.TUESDAY)
+        Temporal premierJeudiDansTroisMois = TemporalAdjusters.firstInMonth(DayOfWeek.THURSDAY)
                                                                 .adjustInto(date.plusMonths(3));
 
         out(

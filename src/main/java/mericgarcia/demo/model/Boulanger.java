@@ -3,7 +3,7 @@ package mericgarcia.demo.model;
 /**
  * Created by mericgarcia on 29/01/15.
  */
-public class Boulanger implements FrenchSpeeker, Worker{
+public class Boulanger implements FrenchSpeaker, Worker{
 
     String name;
 
